@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uf2.mp3.control.MainWindow">
+   <children>
+      <Button fx:id="btn01" layoutX="135.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#btnClick" text="Add" AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="54.0" />
+      <ListView fx:id="lsvLlista01" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="txtDada" layoutX="200.0" layoutY="54.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="54.0" />
+   </children>
+</AnchorPane>
