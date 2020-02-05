@@ -19,12 +19,12 @@
             </Tab>
           <Tab text="BarChart">
                <content>
-                  <BarChart>
+                  <BarChart fx:id="barChart01">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <CategoryAxis side="BOTTOM" fx:id="x" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis fx:id="y" side="LEFT" />
                     </yAxis>
                   </BarChart>
                </content>
