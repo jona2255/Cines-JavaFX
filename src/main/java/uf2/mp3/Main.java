@@ -12,7 +12,9 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         AnchorPane root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/chartExample.fxml"));
         stage.setTitle("testFX");
-        stage.setScene(new Scene(root));
+        Scene sc = new Scene(root);
+        sc.getStylesheets().add("css/styleCharts.css");
+        stage.setScene(sc);
         stage.show();
 
     }
