@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
+import javafx.scene.control.TabPane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class ChartExampleController implements Initializable {
     @FXML
     private NumberAxis y;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         dataCharts = FXCollections.observableArrayList();
         loadDataPieChart();
         pieChart01.setData(dataCharts);

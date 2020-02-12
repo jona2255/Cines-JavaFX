@@ -29,6 +29,8 @@ public class MainWindow implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         i=0;
         lsvLlista01.setItems(names);
+        btn01.setStyle("-fx-background-radius: 15;");
+        txtDada.setStyle("-fx-background-radius: 15");
 
     }
 
