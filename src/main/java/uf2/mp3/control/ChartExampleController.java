@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ public class ChartExampleController implements Initializable {
     @FXML
     private NumberAxis y;
 
+    @FXML
+    ImageView img01;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -37,6 +42,8 @@ public class ChartExampleController implements Initializable {
         barChart01.setTitle("Salari anual");
         x.setLabel("Llenguatges");
         y.setLabel("Euros");
+
+        img01.setImage(new Image("http://gencat.cat/llengua/cinema/docsbarcelonadelmes_cicle.jpg"));
     }
 
     private void loadDataPieChart() {
