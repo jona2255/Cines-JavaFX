@@ -1,4 +1,8 @@
-> Per crear un executable amb les dependències necessàries cal fer el següent:
+### Com crear un executable independent del IDE
+
+> És necessari que tingueu el plugin maven `maven-assembly-plugin` tal com es veu al `pom.xml` del projecte.
+
+Després cal executar les següents accions:
 
 `mvn compile assembly:single`
 
@@ -10,5 +14,5 @@ Això crea a la carpeta `target` el fitxer `jar` amb el nom i la versió indicad
 `
 
 > Per simplificar la operació us podeu crear un script com el següent
-> [runfx.sh](runfx.sh)
->
+
+[runfx.sh](runfx.sh)
