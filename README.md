@@ -2,14 +2,13 @@
 
 `mvn compile assembly:single`
 
-Això crea a la carpeta `target` el fitxer `jar` amb el nom i la versió indiqcades al `pom.xml`
+Això crea a la carpeta `target` el fitxer `jar` amb el nom i la versió indicades al `pom.xml`
 
 > A continuació només cal executar:
-  
+
 `java --module-path: java --module-path pathSDK-Java/lib --add-modules javafx.controls,javafx.fxml -jar nomFitxer.jar
 `
 
-> Per simplificar la operació us podeu crear un scrip com el següent
-> [runfx.sh](runfx.sh)  
+> Per simplificar la operació us podeu crear un script com el següent
+> [runfx.sh](runfx.sh)
 >
-
