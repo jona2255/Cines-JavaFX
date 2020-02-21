@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uf2.mp3.control.ChartExampleController">
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.shape.Circle?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uf2.mp3.control.FilmsController">
     <children>
         <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-
-                <!--Pestaña de Películas-->
                 <Tab text="Peliculas">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #44007A;">
@@ -68,8 +68,6 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-
-                <!--Pestaña de Ciclos-->
                 <Tab text="Ciclos">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -79,27 +77,23 @@
                             </children></AnchorPane>
                     </content>
                 </Tab>
-
-                <!--Pestaña de... ¿Gráfico?-->
                 <Tab text="Gráfico">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
                                 <Pane fx:id="pane" layoutX="614.0" layoutY="67.0" prefHeight="68.0" prefWidth="190.0" />
-                        <BarChart layoutX="21.0" layoutY="54.0" prefHeight="299.0" prefWidth="428.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <Label layoutX="170.0" layoutY="32.0" prefHeight="16.0" prefWidth="248.0" text="Peliculas por año" />
-                            </children>
-                        </AnchorPane>
+                                <PieChart fx:id="pieChart" layoutX="150.0" layoutY="34.0" />
+                            </children></AnchorPane>
                     </content>
                 </Tab>
             </tabs>
         </TabPane>
+        <HBox layoutX="715.0" prefHeight="28.0" prefWidth="72.0">
+            <children>
+                <Circle fx:id="bntMinimizar" fill="#68c927" onMouseClicked="#handlerMouseEvent" radius="14.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="#99999900" strokeType="INSIDE" strokeWidth="2.0" />
+                <Circle fx:id="btnAmpliar" fill="#ffba52" onMouseClicked="#handlerMouseEvent" radius="14.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="#99999900" strokeType="INSIDE" strokeWidth="2.0" />
+                <Circle fx:id="btnCerrar" fill="#ff5100" onMouseClicked="#handlerMouseEvent" radius="14.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="#99999900" strokeType="INSIDE" strokeWidth="2.0" />
+            </children></HBox>
+
     </children>
 </AnchorPane>

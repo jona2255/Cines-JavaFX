@@ -5,17 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import uf2.mp3.control.ChartExampleController;
-import uf2.mp3.control.MainWindow;
+import uf2.mp3.control.FilmsController;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/chartExample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/filmsWindow.fxml"));
         AnchorPane root = loader.load();
-        ChartExampleController chartExampleController = loader.getController();
-        chartExampleController.setStage(stage);
+        FilmsController filmsController = loader.getController();
+        filmsController.setStage(stage);
 //        MainWindow mainWindow = loader.getController();
 //        mainWindow.setStage(stage);
         stage.setTitle("testFX");

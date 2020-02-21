@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class ChartExampleController implements Initializable {
+public class FilmsController implements Initializable {
     private final ObservableList<PieChart.Data> dataCharts = FXCollections.observableArrayList();
     private Stage stage;
 
