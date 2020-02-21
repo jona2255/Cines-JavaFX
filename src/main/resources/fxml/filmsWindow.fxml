@@ -67,7 +67,7 @@
                                                     </font>
                                                 </Text>
                                                 <Text fx:id="añoFilm" fill="#4a4a4a" layoutX="170.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                                                <Button fx:id="buttonSesion" layoutX="238.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#clickFilmSesion" prefHeight="26.0" prefWidth="134.0" text="ver sesiones" />
+                                                <Button fx:id="buttonSesion" layoutX="238.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#clickFilmSesion" prefHeight="26.0" prefWidth="134.0" text="Ver sesiones" />
                                             </children></AnchorPane>
                                     </children></AnchorPane>
                             </children>
@@ -88,9 +88,9 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Pane fx:id="pane" layoutX="487.0" layoutY="40.0" prefHeight="36.0" prefWidth="175.0" />
-                                <PieChart fx:id="pieChart" layoutX="35.0" layoutY="63.0" prefHeight="255.0" prefWidth="419.0" />
-                        <Label layoutX="204.0" layoutY="33.0" text="Peliculas por año:">
+                                <Pane fx:id="pane" layoutX="310.0" layoutY="31.0" prefHeight="36.0" prefWidth="175.0" />
+                                <PieChart fx:id="pieChart" layoutX="27.0" layoutY="98.0" prefHeight="320.0" prefWidth="419.0" />
+                        <Label layoutX="27.0" layoutY="24.0" text="Peliculas por año:">
                            <font>
                               <Font size="30.0" />
                            </font>
