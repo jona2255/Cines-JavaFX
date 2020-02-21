@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import uf2.mp3.control.FilmsController;
 
 public class Main extends Application {
@@ -24,6 +25,7 @@ public class Main extends Application {
         Scene sc = new Scene(root);
         sc.getStylesheets().add("css/styleCharts.css");
         stage.setScene(sc);
+        stage.setResizable(false);
         stage.show();
 
     }
