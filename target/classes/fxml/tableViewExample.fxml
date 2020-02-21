@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uf2.mp3.control.TableViewExampleController">
+   <children>
+      <TableView fx:id="tblTaula01" editable="true" layoutX="85.0" layoutY="71.0" prefHeight="259.0" prefWidth="431.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="71.0">
+        
+      </TableView>
+   </children>
+</AnchorPane>
