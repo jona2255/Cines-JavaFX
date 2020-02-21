@@ -68,10 +68,10 @@ public class FilmsController implements Initializable {
     private Text directorTitle;
 
     @FXML
-    private Text añoFilm;
+    private Text yearFilm;
 
     @FXML
-    private Text añoTitle;
+    private Text yearTitle;
 
     @FXML
     private PieChart pieChart;
@@ -112,14 +112,17 @@ public class FilmsController implements Initializable {
         }
     }
 
+
+//    PIECHART Peliculas por año
+// -----------------------------------------------------------------------------------------
     private void diagrama(){
-        List<Integer> años = films.stream()
+        List<Integer> years = films.stream()
                 .map(film -> film.getAny())
                 .filter(i -> i > 0 && i < 3000).distinct()
                 .sorted(Comparator.comparingInt(integer -> integer))
                 .collect(Collectors.toList());
 
-        for (Integer i: años) {
+        for (Integer i: years) {
             long numResultat= films.stream()
                     .filter(film1 -> film1.getAny() == i)
                     .count();
@@ -145,6 +148,7 @@ public class FilmsController implements Initializable {
             });
         });
     }
+//-----------------------------------------------------------------------------------------
 
     private void connectedXML() throws JAXBException, IOException {
         conexionXML = new ConexionXML();
@@ -187,7 +191,7 @@ public class FilmsController implements Initializable {
 
                     imageFilm.setImage(imageMovie);
                     direcctorFilm.setText(f.getDireccio());
-                    añoFilm.setText(String.valueOf(f.getAny()));
+                    yearFilm.setText(String.valueOf(f.getAny()));
 
                     List<Sesion> listaCines = sesions.stream().filter(sesion -> f.getIdFilm() == sesion.getIdFilm()).collect(Collectors.toList());
                     listObservableSesions.addAll(listaCines);
@@ -230,16 +234,16 @@ public class FilmsController implements Initializable {
         textTitleFilm.setVisible(true);
         direcctorFilm.setVisible(true);
         directorTitle.setVisible(true);
-        añoFilm.setVisible(true);
-        añoTitle.setVisible(true);
+        yearFilm.setVisible(true);
+        yearTitle.setVisible(true);
     }
 
     public void opaqueInfoMovie(){
         textTitleFilm.setVisible(false);
         direcctorFilm.setVisible(false);
         directorTitle.setVisible(false);
-        añoFilm.setVisible(false);
-        añoTitle.setVisible(false);
+        yearFilm.setVisible(false);
+        yearTitle.setVisible(false);
     }
 
     public void clickFilmSesion(MouseEvent mouseEvent) {

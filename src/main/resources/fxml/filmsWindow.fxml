@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
@@ -8,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uf2.mp3.control.FilmsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uf2.mp3.control.FilmsController">
     <children>
         <TabPane fx:id="tabPane" prefHeight="512.0" prefWidth="862.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
@@ -67,6 +66,30 @@
                         </AnchorPane>
                     </content>
                 </Tab>
+
+                <Tab text="Cines">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+
+                                <ListView fx:id="listViewCines" layoutX="85.0" layoutY="134.0" prefHeight="311.0" prefWidth="741.0" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="90.0" />
+                        <Label layoutX="58.0" layoutY="33.0" text="Listado de Cines:">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="126.0" layoutY="425.0" mnemonicParsing="false" text="Ver peliculas">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
+                        <Button layoutX="610.0" layoutY="425.0" mnemonicParsing="false" text="Ver sesiones">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Button>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+
                 <Tab text="Ciclos">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
