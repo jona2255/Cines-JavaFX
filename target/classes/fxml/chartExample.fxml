@@ -13,6 +13,8 @@
     <children>
         <TabPane fx:id="tabPane" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
+
+                <!--Pestaña de Películas-->
                 <Tab text="Peliculas">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #44007A;">
@@ -68,6 +70,8 @@
                         </AnchorPane>
                     </content>
                 </Tab>
+
+                <!--Pestaña de Ciclos-->
                 <Tab text="Ciclos">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -77,6 +81,8 @@
                             </children></AnchorPane>
                     </content>
                 </Tab>
+
+                <!--Pestaña de... ¿Gráfico?-->
                 <Tab text="Gráfico">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -88,12 +94,5 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <HBox layoutX="715.0" prefHeight="28.0" prefWidth="72.0">
-            <children>
-                <Circle fx:id="bntMinimizar" fill="#68c927" onMouseClicked="#handlerMouseEvent" radius="14.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="#99999900" strokeType="INSIDE" strokeWidth="2.0" />
-                <Circle fx:id="btnAmpliar" fill="#ffba52" onMouseClicked="#handlerMouseEvent" radius="14.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="#99999900" strokeType="INSIDE" strokeWidth="2.0" />
-                <Circle fx:id="btnCerrar" fill="#ff5100" onMouseClicked="#handlerMouseEvent" radius="14.0" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="#99999900" strokeType="INSIDE" strokeWidth="2.0" />
-            </children></HBox>
-
     </children>
 </AnchorPane>
