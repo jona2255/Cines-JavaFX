@@ -59,7 +59,7 @@
                                                     </font>
                                                 </Text>
                                                 <Text fx:id="añoFilm" fill="#4a4a4a" layoutX="170.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                                                <Button fx:id="buttonSesion" layoutX="238.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#clickFilmSesion" prefHeight="26.0" prefWidth="134.0" text="ver sesiones" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="104.0" />
+                                                <Button fx:id="buttonSesion" layoutX="238.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#clickFilmSesion" prefHeight="26.0" prefWidth="134.0" text="Ver sesiones" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="104.0" />
                                             </children></AnchorPane>
                                     </children></AnchorPane>
                             </children>
