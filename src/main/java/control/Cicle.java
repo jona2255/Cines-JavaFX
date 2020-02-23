@@ -1,4 +1,4 @@
-package uf2.mp3.control;
+package control;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -16,6 +16,17 @@ public class Cicle {
     String img;
 
     String buscar;
+
+    @Override
+    public String toString() {
+        return "Cicle{" +
+                "nombre='" + nombre + '\'' +
+                ", idCiclo='" + idCiclo + '\'' +
+                ", info='" + info + '\'' +
+                ", img='" + img + '\'' +
+                ", buscar='" + buscar + '\'' +
+                '}';
+    }
 
     public String getNombre() {
         return nombre;
@@ -36,16 +47,4 @@ public class Cicle {
     public String getBuscar() {
         return buscar;
     }
-
-    @Override
-    public String toString() {
-        return "Cicle{" +
-                "nombre='" + nombre + '\'' +
-                ", idCiclo='" + idCiclo + '\'' +
-                ", info='" + info + '\'' +
-                ", img='" + img + '\'' +
-                ", buscar='" + buscar + '\'' +
-                '}';
-    }
-
 }

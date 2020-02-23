@@ -1,7 +1,8 @@
-package uf2.mp3.control;
+package control;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Film implements Serializable {
@@ -49,6 +50,13 @@ public class Film implements Serializable {
         super();
     }
 
+    @Override
+    public String toString() {
+        return  "titol: " + titol + "\n" +
+                "Any: " + any + "\n" +
+                "Direccio: " + direccio + "\n";
+    }
+
     public String getImage() {
         return image;
     }
@@ -85,13 +93,6 @@ public class Film implements Serializable {
 
     public String getIdioma() {
         return idioma;
-    }
-
-    @Override
-    public String toString() {
-        return  "titol: " + titol + "\n" +
-                "Any: " + any + "\n" +
-                "Direccio: " + direccio + "\n";
     }
 }
 

@@ -1,4 +1,4 @@
-package uf2.mp3.control;
+package control;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
@@ -23,10 +23,33 @@ public class Sesion implements Serializable {
     String localidad;
 
     @XmlElement(name="CICLEID")
-    String cicleID;
+    int cicleID;
+
+    @XmlElement(name="ses_data")
+    String fecha;
+
+    @XmlElement(name="ORDRESESSIO")
+    String sesionOrdre;
+
+
 
     public Sesion() {
         super();
+    }
+
+    @Override
+    public String toString() {
+        return "Sesion{" +
+                "idCinema=" + idCinema +
+                ", idFilm=" + idFilm +
+                ", titulo='" + titulo + '\'' +
+                ", idSesion=" + idSesion +
+                ", nomCine='" + nomCine + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", cicleID='" + cicleID + '\'' +
+                ", fecha='" + fecha + '\'' +
+                ", sesionOrdre='" + sesionOrdre + '\'' +
+                '}';
     }
 
     public int getIdCinema() {
@@ -53,20 +76,15 @@ public class Sesion implements Serializable {
         return localidad;
     }
 
-    public String getCicleID() {
+    public int getCicleID() {
         return cicleID;
     }
 
-    @Override
-    public String toString() {
-        return "Sesion{" +
-                "idCinema=" + idCinema +
-                ", idFilm=" + idFilm +
-                ", titulo='" + titulo + '\'' +
-                ", idSesion=" + idSesion +
-                ", nomCine='" + nomCine + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", cicleID='" + cicleID + '\'' +
-                '}';
+    public String getFecha() {
+        return fecha;
+    }
+
+    public String getSesionOrdre() {
+        return sesionOrdre;
     }
 }

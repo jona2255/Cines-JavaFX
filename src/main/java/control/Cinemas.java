@@ -1,4 +1,4 @@
-package uf2.mp3.control;
+package control;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

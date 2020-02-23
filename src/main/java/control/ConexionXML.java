@@ -1,5 +1,4 @@
-package uf2.mp3.control;
-
+package control;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -10,14 +9,12 @@ import java.net.URL;
 import java.util.List;
 
 public class ConexionXML {
-
     List<Film> films;
     List<Cinema> cinemas;
     List<Cicle> cicles;
     List<Sesion> sesions;
 
     public void connectedFilms() throws JAXBException, IOException {
-
         URL url = new URL("http://gencat.cat/llengua/cinema/provacin.xml");
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
         http.addRequestProperty("User-Agent", "Mozilla/4.76");
@@ -28,7 +25,6 @@ public class ConexionXML {
     }
 
     public void connectedCinema() throws JAXBException, IOException {
-
         URL url = new URL("http://gencat.cat/llengua/cinema/cinemes.xml");
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
         http.addRequestProperty("User-Agent", "Mozilla/4.76");
@@ -39,7 +35,6 @@ public class ConexionXML {
     }
 
     public void connectedCicles() throws JAXBException, IOException {
-
         URL url = new URL("http://gencat.cat/llengua/cinema/cicles.xml");
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
         http.addRequestProperty("User-Agent", "Mozilla/4.76");
@@ -50,7 +45,6 @@ public class ConexionXML {
     }
 
     public void connectedSessions() throws JAXBException, IOException {
-
         URL url = new URL("http://www.gencat.cat/llengua/cinema/film_sessions.xml");
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
         http.addRequestProperty("User-Agent", "Mozilla/4.76");
@@ -75,4 +69,5 @@ public class ConexionXML {
     public List<Sesion> getSesions() {
         return sesions;
     }
+
 }

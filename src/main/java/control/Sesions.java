@@ -1,4 +1,4 @@
-package uf2.mp3.control;
+package control;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @XmlRootElement(name = "dataroot")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-class Films {
-    @XmlElement(name="FILM")
-    List<Film> filmsList;
+class Sesions {
+    @XmlElement(name="SESSIONS")
+    List<Sesion> sesionsList;
 }

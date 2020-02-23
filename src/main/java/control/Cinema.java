@@ -1,4 +1,4 @@
-package uf2.mp3.control;
+package control;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -19,6 +19,18 @@ public class Cinema {
     String provincia;
 
     String buscar;
+
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "nombre='" + nombre + '\'' +
+                ", idCinema='" + idCinema + '\'' +
+                ", adreça='" + adreça + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", buscar='" + buscar + '\'' +
+                '}';
+    }
 
     public String getNombre() {
         return nombre;
@@ -42,17 +54,5 @@ public class Cinema {
 
     public String getBuscar() {
         return buscar;
-    }
-
-    @Override
-    public String toString() {
-        return "Cinema{" +
-                "nombre='" + nombre + '\'' +
-                ", idCinema='" + idCinema + '\'' +
-                ", adreça='" + adreça + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", provincia='" + provincia + '\'' +
-                ", buscar='" + buscar + '\'' +
-                '}';
     }
 }
