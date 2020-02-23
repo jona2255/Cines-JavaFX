@@ -19,6 +19,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.StageStyle;
 
 import javax.xml.bind.JAXBException;
@@ -71,6 +73,10 @@ public class SampleController implements Initializable {
     private Text añoTitle;
     @FXML
     private TextField textFieldPelicula;
+    @FXML
+    private Text sinopsiFilm;
+    @FXML
+    private Text sinopsiTitle;
     @FXML
     private Button buttonBuscar;
 
@@ -195,7 +201,7 @@ public class SampleController implements Initializable {
                         imageFilm.setImage(new Image(url+f.getImage()));
                         direcctorFilm.setText(f.getDireccio());
                         añoFilm.setText(String.valueOf(f.getAny()));
-
+                        sinopsiFilm.setText(f.getSinopsi());
                         listObservableSesionsEnvio.clear();
 
                         //atributos que envio a la nueva ventana (sesiones)
@@ -252,7 +258,7 @@ public class SampleController implements Initializable {
         sesionController.recibeInfoSesiones(tituloFilm, listObservableSesionsEnvio);
 
         stage.setScene(new Scene(root));
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -266,16 +272,8 @@ public class SampleController implements Initializable {
         peliculasController.recibeInfoSesiones(tituloCiclo, listObservableFilmsEnvio);
 
         stage.setScene(new Scene(root));
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         stage.show();
-    }
-
-    public void handlerMouseEvent(MouseEvent mouseEvent) {
-        if(mouseEvent.getSource() == btnCerrar){
-//            System.exit(0);
-            Stage stage = (Stage) btnCerrar.getScene().getWindow();
-            stage.close();
-        }
     }
 
     public void makeDragable(){
@@ -297,6 +295,8 @@ public class SampleController implements Initializable {
         directorTitle.setVisible(true);
         añoFilm.setVisible(true);
         añoTitle.setVisible(true);
+        sinopsiFilm.setVisible(true);
+        sinopsiTitle.setVisible(true);
     }
 
     public void opaqueInfoMovie(){
@@ -305,6 +305,8 @@ public class SampleController implements Initializable {
         directorTitle.setVisible(false);
         añoFilm.setVisible(false);
         añoTitle.setVisible(false);
+        sinopsiFilm.setVisible(false);
+        sinopsiTitle.setVisible(false);
     }
 
     public void buscador(MouseEvent mouseEvent) {

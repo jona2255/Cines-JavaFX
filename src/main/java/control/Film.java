@@ -52,9 +52,10 @@ public class Film implements Serializable {
 
     @Override
     public String toString() {
-        return  "titol: " + titol + "\n" +
+        return "titol: " + titol + "\n" +
                 "Any: " + any + "\n" +
-                "Direccio: " + direccio + "\n";
+                "Direccio: " + direccio + "\n" +
+                "Sinopsi: " + sinopsi + "\n";
     }
 
     public String getImage() {

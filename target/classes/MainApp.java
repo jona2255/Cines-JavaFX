@@ -20,10 +20,10 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException, JAXBException {
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        stage.setTitle("Cinema");
-        Scene scene = new Scene(root, 800,500);
+        stage.setTitle("Cines");
+        Scene scene = new Scene(root);
 
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setResizable(false);
         stage.setScene(scene);
 //        stage.setResizable(false);
         stage.show();
