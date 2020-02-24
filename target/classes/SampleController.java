@@ -199,12 +199,13 @@ public class SampleController implements Initializable {
 
     // Diaggrama films/años
     private void diagrama(){
+        // lista con los años de los films
         List<Integer> años = films.stream()
                 .map(film -> film.getAny())
                 .filter(i -> i > 0 && i < 3000).distinct()
                 .sorted(Comparator.comparingInt(integer -> integer))
                 .collect(Collectors.toList());
-
+        // Contador de peliculas por año
         for (Integer i: años) {
             long numResultat= films.stream()
                     .filter(film1 -> film1.getAny() == i)
@@ -212,12 +213,15 @@ public class SampleController implements Initializable {
             dataCharts.add(new PieChart.Data(i.toString(), numResultat));
         }
 
+        // Introduce los datos en el pieChart
         pieChart.setData(dataCharts);
         pieChart.setLegendSide(Side.LEFT);
 
         final Label label = new Label();
         pane.getChildren().add(label);
         label.setFont(Font.font("SanSerif", FontWeight.BLACK, 20));
+
+        // Muestra cuantas pelis se estrenaron ese año, en un "pane" aparte
 
         pieChart.getData().stream().forEach(data -> {
             data.getNode().addEventHandler(MouseEvent.ANY, e->{
@@ -231,24 +235,28 @@ public class SampleController implements Initializable {
             });
         });
     }
-
+    // Diagrama sesiones/localidad
     private void diagrama2(){
+        // Guarda todas las localidades de las sesiones
         List<String> localidad = sesions.stream()
                 .map(sesion -> sesion.getLocalidad())
                 .sorted()
                 .distinct()
                 .collect(Collectors.toList());
 
+        // Contador de sesiones por localidad
         for (String s: localidad){
             long numResultat = sesions.stream()
                     .filter(sesion -> sesion.getLocalidad().equals(s))
                     .count();
+            // Introduce los datos en el barChart
             XYChart.Series set1 = new XYChart.Series<>();
             set1.getData().add(new XYChart.Data(s,numResultat));
             sesionesChart.getData().addAll(set1);
         }
     }
 
+    // Obtiene los datos de los xml
     private void connectedXML() throws JAXBException, IOException {
         conexionXML = new ConexionXML();
         conexionXML.connectedFilms();
@@ -262,21 +270,21 @@ public class SampleController implements Initializable {
         cicles = conexionXML.getCicles();
     }
 
+    // Muestra la lista de los films
     private void loadFilms() {
-
         List<String> listaTitle = films.stream().map(film -> film.getTitol()).collect(Collectors.toList());
         images = films.stream().map(film -> film.getImage()).collect(Collectors.toList());
 
         listObservableFilms.addAll(listaTitle);
         listViewFilms.getItems().addAll(listObservableFilms);
     }
-
+    // Muestra la lista de los ciclos
     private void loadCiclos(){
         List<String> listaTitle = cicles.stream().map(sesion -> sesion.getNombre()).collect(Collectors.toList());
         listObservableCicles.addAll(listaTitle);
         listViewCiclos.getItems().addAll(listObservableCicles);
     }
-
+    // Muestra la lista de los cines
     private void loadCines(){
         List<String> listaTitle = cinemas.stream().map(Cinema::getNombre).collect(Collectors.toList());
         listObservableCines.addAll(listaTitle);
@@ -285,7 +293,7 @@ public class SampleController implements Initializable {
 
     /**
      * Display selected.
-     *
+     * Muestra los datos del film, ciclo, o cine seleccionado en la lista, y envia los atributos cogidos para abrir la ventana y poder hacer la relación.
      * @param mouseEvent the mouse event
      */
     public void displaySelected(MouseEvent mouseEvent) {
@@ -343,7 +351,6 @@ public class SampleController implements Initializable {
                                         listaFilmsCicle.add(film);
                                     }
                                 });
-//                            listaFilmsCicle = films.stream().filter(film -> film.getIdFilm() == sesion.getCicleID()).collect(Collectors.toList());
                             }
                         });
 
@@ -357,7 +364,7 @@ public class SampleController implements Initializable {
             String titleCine = listViewCines.getSelectionModel().getSelectedItem();
             textTitleCine.setText(titleCine);
 
-            List<Sesion> listaSesionesCines = new ArrayList<>();
+            List<Sesion> listaSesionesCines;
 
             if(titleCine==null|| titleCine.isEmpty()){
                 textTitleCine.setText("No has seleccionado ninguna pelicula");
@@ -385,7 +392,7 @@ public class SampleController implements Initializable {
 
     /**
      * Page sesion.
-     *
+     * Hace la acción del botón "Ver Sesiones" del apartado Peliculas y Cines y abre la ventana con las sesiones de ese film o de ese cine
      * @param event the event
      * @throws IOException the io exception
      */
@@ -405,7 +412,7 @@ public class SampleController implements Initializable {
 
     /**
      * Page films ciclo.
-     *
+     * Hace la acción del botón "Ver Peliculas" del apartado Ciclos y abre la ventana con los films de ese ciclo
      * @param event the event
      * @throws IOException the io exception
      */
@@ -425,7 +432,7 @@ public class SampleController implements Initializable {
 
 
     /**
-     * Visible info movie.
+     * Muestra los datos del film seleccionado
      */
     public void visibleInfoMovie(){
         textTitleFilm.setVisible(true);
@@ -438,7 +445,7 @@ public class SampleController implements Initializable {
     }
 
     /**
-     * Opaque info movie.
+     * Oculta los datos del film
      */
     public void opaqueInfoMovie(){
         textTitleFilm.setVisible(false);
@@ -451,7 +458,7 @@ public class SampleController implements Initializable {
     }
 
     /**
-     * Visible info cicle.
+     * Muestra los datos del ciclo seleccionado
      */
     public void visibleInfoCicle(){
         textTitleCiclo.setVisible(true);
@@ -461,7 +468,7 @@ public class SampleController implements Initializable {
     }
 
     /**
-     * Opaque info cicle.
+     * Oculta los datos de los ciclos
      */
     public void opaqueInfoCicle(){
         textTitleCiclo.setVisible(false);
@@ -471,7 +478,7 @@ public class SampleController implements Initializable {
     }
 
     /**
-     * Visible info cine.
+     * Muestra los datos del cine seleccionado
      */
     public void visibleInfoCine(){
         textTitleCine.setVisible(true);
@@ -484,7 +491,7 @@ public class SampleController implements Initializable {
     }
 
     /**
-     * Opaque info cine.
+     * Oculta los datos de los cines
      */
     public void opaqueInfoCine(){
         textTitleCine.setVisible(false);
@@ -498,7 +505,7 @@ public class SampleController implements Initializable {
 
     /**
      * Buscador.
-     *
+     * Busca los films en el apartado "Peliculas"
      * @param mouseEvent the mouse event
      */
     public void buscador(MouseEvent mouseEvent) {
@@ -515,7 +522,7 @@ public class SampleController implements Initializable {
 
     /**
      * Buscador cines.
-     *
+     * Busca los cines en el apartado "Cines"
      * @param mouseEvent the mouse event
      */
     public void buscadorCines(MouseEvent mouseEvent) {

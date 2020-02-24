@@ -48,6 +48,7 @@ public class SesionController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
+    // Muestra todas las sesiones del film seleccionado
     void añadirSesiones(){
         tableColumnTitleCinema.setCellValueFactory(new PropertyValueFactory("nomCine"));
         tableColumnSesion.setCellValueFactory(new PropertyValueFactory("sesionOrdre"));
@@ -58,6 +59,7 @@ public class SesionController implements Initializable {
         sesionTitle.setText(tituloFilm);
     }
 
+    // recibe los atributos de la sesion para mostrar
     public void recibeInfoSesiones(String tituloFilm, ObservableList<Sesion> listObservableSesions) {
         this.listObservableSesions = listObservableSesions;
         this.tituloFilm = tituloFilm;
