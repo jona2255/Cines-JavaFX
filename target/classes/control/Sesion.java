@@ -2,8 +2,9 @@ package control;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class Sesion implements Serializable {
+public class Sesion implements Serializable, Comparable<Sesion> {
     @XmlElement(name="CINEID")
     int idCinema;
 
@@ -86,5 +87,10 @@ public class Sesion implements Serializable {
 
     public String getSesionOrdre() {
         return sesionOrdre;
+    }
+
+    @Override
+    public int compareTo(Sesion o) {
+        return this.titulo.compareTo(o.titulo);
     }
 }

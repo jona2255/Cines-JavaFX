@@ -2,10 +2,12 @@ import control.Film;
 import control.Sesion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -16,14 +18,11 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PeliculasController implements Initializable {
+public class CiclosController implements Initializable {
 
     ObservableList<Film> listObservableFilms = FXCollections.observableArrayList();
 
     String tituloCiclo;
-
-    @FXML
-    private Circle btnCerrar;
 
     @FXML
     private Text cicloTitle;
@@ -48,6 +47,7 @@ public class PeliculasController implements Initializable {
 
     }
 
+    // recibe los atributos del film para mostrar
     public void recibeInfoSesiones(String tituloCiclo, ObservableList<Film> listObservableFilms) {
         this.listObservableFilms = listObservableFilms;
         this.tituloCiclo = tituloCiclo;
@@ -55,6 +55,7 @@ public class PeliculasController implements Initializable {
         añadirPeliculas();
     }
 
+    // Muestra todos los films del ciclo seleccionado
     private void añadirPeliculas() {
         tableColumnDirectorFilm.setCellValueFactory(new PropertyValueFactory("direccio"));
         tableColumnTitleFilm.setCellValueFactory(new PropertyValueFactory("titol"));
@@ -65,12 +66,4 @@ public class PeliculasController implements Initializable {
         cicloTitle.setText(tituloCiclo);
     }
 
-    public void handlerMouseEvent(MouseEvent mouseEvent) {
-        if (mouseEvent.getSource() == btnCerrar) {
-//            System.exit(0);
-            Stage stage = (Stage) btnCerrar.getScene().getWindow();
-//            tableViewSesiones.getItems().clear();
-            stage.close();
-        }
-    }
 }

@@ -23,9 +23,9 @@ public class MainApp extends Application {
         stage.setTitle("Cines");
         Scene scene = new Scene(root);
 
+        // Bloquea la opción de poder modificar el tamañao de la ventana
         stage.setResizable(false);
         stage.setScene(scene);
-//        stage.setResizable(false);
         stage.show();
     }
 }

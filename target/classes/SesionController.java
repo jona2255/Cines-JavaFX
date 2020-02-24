@@ -1,3 +1,4 @@
+import control.Film;
 import control.Sesion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -40,8 +42,7 @@ public class SesionController implements Initializable {
     @FXML
     private TableColumn<Sesion, String> tableColumnLocalidad;
 
-    @FXML
-    private Circle btnCerrar;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,12 +65,5 @@ public class SesionController implements Initializable {
         añadirSesiones();
     }
 
-    public void handlerMouseEvent(MouseEvent mouseEvent) {
-        if(mouseEvent.getSource() == btnCerrar){
-//            System.exit(0);
-            Stage stage = (Stage) btnCerrar.getScene().getWindow();
-//            tableViewSesiones.getItems().clear();
-            stage.close();
-        }
-    }
+
 }

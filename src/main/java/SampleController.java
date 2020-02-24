@@ -8,20 +8,18 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.StageStyle;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -32,28 +30,79 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * The type Sample controller.
+ */
 public class SampleController implements Initializable {
     private final ObservableList<PieChart.Data> dataCharts = FXCollections.observableArrayList();
 
-    String tituloFilm;
-    String tituloCiclo;
 
+    /**
+     * The Titulo film.
+     */
+    String tituloFilm;
+    /**
+     * The Titulo ciclo.
+     */
+    String tituloCiclo;
+    /**
+     * The Titulo cine.
+     */
+    String tituloCine;
+
+    /**
+     * The Conexion xml.
+     */
     ConexionXML conexionXML;
+    /**
+     * The Images.
+     */
     List<String> images;
+    /**
+     * The Url.
+     */
     String url = "http://www.gencat.cat/llengua/cinema/";
 
+    /**
+     * The Films.
+     */
     List<Film> films;
+    /**
+     * The Sesions.
+     */
     List<Sesion> sesions;
+    /**
+     * The Cinemas.
+     */
     List<Cinema> cinemas;
+    /**
+     * The Cicles.
+     */
     List<Cicle> cicles;
 
     private double x=0, y=0;
 
+    /**
+     * The List observable sesions envio.
+     */
     ObservableList<Sesion> listObservableSesionsEnvio =FXCollections.observableArrayList();
+    /**
+     * The List observable films envio.
+     */
     ObservableList<Film> listObservableFilmsEnvio = FXCollections.observableArrayList();
 
+    /**
+     * The List observable films.
+     */
     ObservableList<String> listObservableFilms =FXCollections.observableArrayList();
+    /**
+     * The List observable cicles.
+     */
     ObservableList<String> listObservableCicles =FXCollections.observableArrayList();
+    /**
+     * The List observable cines.
+     */
+    ObservableList<String> listObservableCines =FXCollections.observableArrayList();
 
 
     // atributos de la pelicula
@@ -90,20 +139,42 @@ public class SampleController implements Initializable {
     @FXML
     private ImageView imageCiclo;
 
+    // atributos de Cines
     @FXML
-    private Circle btnCerrar;
+    private ListView<String> listViewCines;
     @FXML
-    private TabPane tabPane;
+    private Text textTitleCine;
     @FXML
-    private Pane pane;
+    private Text provinciaTitle;
+    @FXML
+    private Text provinciaCine;
+    @FXML
+    private Text LocalidadTitle;
+    @FXML
+    private Text localidadCine;
+    @FXML
+    private Text direccionTitle;
+    @FXML
+    private Text direccionCine;
+    @FXML
+    private TextField textFieldCine;
+    @FXML
+    private Button buttonBuscarCine;
 
-    //diagrama 1
+    // Atributos para diagramas
     @FXML
     private PieChart pieChart;
 
+    @FXML
+    private Pane pane;
+    @FXML
+    private BarChart<?, ?> sesionesChart;
 
     @FXML
-    private Button buttonSesion;
+    private CategoryAxis xChart;
+
+    @FXML
+    private NumberAxis yChart;
 
 
     @Override
@@ -113,9 +184,12 @@ public class SampleController implements Initializable {
             connectedXML();
             loadFilms();
             loadCiclos();
-            makeDragable();
+            loadCines();
             opaqueInfoMovie();
+            opaqueInfoCicle();
+            opaqueInfoCine();
             diagrama();
+            diagrama2();
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -123,14 +197,15 @@ public class SampleController implements Initializable {
         }
     }
 
-    //
+    // Diaggrama films/años
     private void diagrama(){
+        // lista con los años de los films
         List<Integer> años = films.stream()
                 .map(film -> film.getAny())
                 .filter(i -> i > 0 && i < 3000).distinct()
                 .sorted(Comparator.comparingInt(integer -> integer))
                 .collect(Collectors.toList());
-
+        // Contador de peliculas por año
         for (Integer i: años) {
             long numResultat= films.stream()
                     .filter(film1 -> film1.getAny() == i)
@@ -138,12 +213,15 @@ public class SampleController implements Initializable {
             dataCharts.add(new PieChart.Data(i.toString(), numResultat));
         }
 
+        // Introduce los datos en el pieChart
         pieChart.setData(dataCharts);
         pieChart.setLegendSide(Side.LEFT);
 
         final Label label = new Label();
         pane.getChildren().add(label);
         label.setFont(Font.font("SanSerif", FontWeight.BLACK, 20));
+
+        // Muestra cuantas pelis se estrenaron ese año, en un "pane" aparte
 
         pieChart.getData().stream().forEach(data -> {
             data.getNode().addEventHandler(MouseEvent.ANY, e->{
@@ -157,7 +235,28 @@ public class SampleController implements Initializable {
             });
         });
     }
+    // Diagrama sesiones/localidad
+    private void diagrama2(){
+        // Guarda todas las localidades de las sesiones
+        List<String> localidad = sesions.stream()
+                .map(sesion -> sesion.getLocalidad())
+                .sorted()
+                .distinct()
+                .collect(Collectors.toList());
 
+        // Contador de sesiones por localidad
+        for (String s: localidad){
+            long numResultat = sesions.stream()
+                    .filter(sesion -> sesion.getLocalidad().equals(s))
+                    .count();
+            // Introduce los datos en el barChart
+            XYChart.Series set1 = new XYChart.Series<>();
+            set1.getData().add(new XYChart.Data(s,numResultat));
+            sesionesChart.getData().addAll(set1);
+        }
+    }
+
+    // Obtiene los datos de los xml
     private void connectedXML() throws JAXBException, IOException {
         conexionXML = new ConexionXML();
         conexionXML.connectedFilms();
@@ -171,21 +270,32 @@ public class SampleController implements Initializable {
         cicles = conexionXML.getCicles();
     }
 
+    // Muestra la lista de los films
     private void loadFilms() {
-
         List<String> listaTitle = films.stream().map(film -> film.getTitol()).collect(Collectors.toList());
         images = films.stream().map(film -> film.getImage()).collect(Collectors.toList());
 
         listObservableFilms.addAll(listaTitle);
         listViewFilms.getItems().addAll(listObservableFilms);
     }
-
+    // Muestra la lista de los ciclos
     private void loadCiclos(){
         List<String> listaTitle = cicles.stream().map(sesion -> sesion.getNombre()).collect(Collectors.toList());
         listObservableCicles.addAll(listaTitle);
         listViewCiclos.getItems().addAll(listObservableCicles);
     }
+    // Muestra la lista de los cines
+    private void loadCines(){
+        List<String> listaTitle = cinemas.stream().map(Cinema::getNombre).collect(Collectors.toList());
+        listObservableCines.addAll(listaTitle);
+        listViewCines.getItems().addAll(listObservableCines);
+    }
 
+    /**
+     * Display selected.
+     * Muestra los datos del film, ciclo, o cine seleccionado en la lista, y envia los atributos cogidos para abrir la ventana y poder hacer la relación.
+     * @param mouseEvent the mouse event
+     */
     public void displaySelected(MouseEvent mouseEvent) {
 
         if(mouseEvent.getSource() == listViewFilms){
@@ -215,39 +325,77 @@ public class SampleController implements Initializable {
             }
         } else if(mouseEvent.getSource() == listViewCiclos){
             String cicleTitle = listViewCiclos.getSelectionModel().getSelectedItem();
-            textTitleCiclo.setText(cicleTitle);
 
             List<Film> listaFilmsCicle = new ArrayList<>();
 
-            for (Cicle c: cicles) {
-                if(c.getNombre().equals(cicleTitle)){
-                    infoCiclo.setText(c.getInfo());
-                    imageCiclo.setImage(new Image(url+c.getImg()));
+            if(textTitleCiclo == null){
+                textTitleCine.setText("No has seleccionado ninguna pelicula");
+            } else {
+                visibleInfoCicle();
+                textTitleCiclo.setText(cicleTitle);
 
-                    listObservableFilmsEnvio.clear();
-                    //atributos que envio a la nueva ventana (films)
+                for (Cicle c : cicles) {
+                    if (c.getNombre().equals(cicleTitle)) {
+                        infoCiclo.setText(c.getInfo());
+                        imageCiclo.setImage(new Image(url + c.getImg()));
 
-                    tituloCiclo = c.getNombre();
+                        listObservableFilmsEnvio.clear();
+                        //atributos que envio a la nueva ventana (films)
 
-                    sesions.forEach(sesion -> {
-                        if(sesion.getCicleID()==c.getIdCiclo()){
-                            films.forEach(film -> {
-                                if(film.getIdFilm() == sesion.getCicleID()){
-                                    listaFilmsCicle.add(film);
-                                }
-                            });
-//                            listaFilmsCicle = films.stream().filter(film -> film.getIdFilm() == sesion.getCicleID()).collect(Collectors.toList());
-                        }
-                    });
+                        tituloCiclo = c.getNombre();
 
-                    listObservableFilmsEnvio.addAll(listaFilmsCicle);
-                    listaFilmsCicle.clear();
+                        sesions.forEach(sesion -> {
+                            if (sesion.getCicleID() == c.getIdCiclo()) {
+                                films.forEach(film -> {
+                                    if (film.getIdFilm() == sesion.getIdFilm()) {
+                                        listaFilmsCicle.add(film);
+                                    }
+                                });
+                            }
+                        });
 
+                        listObservableFilmsEnvio.addAll(listaFilmsCicle);
+                        listaFilmsCicle.clear();
+
+                    }
+                }
+            }
+        } else if(mouseEvent.getSource() == listViewCines){
+            String titleCine = listViewCines.getSelectionModel().getSelectedItem();
+            textTitleCine.setText(titleCine);
+
+            List<Sesion> listaSesionesCines;
+
+            if(titleCine==null|| titleCine.isEmpty()){
+                textTitleCine.setText("No has seleccionado ninguna pelicula");
+            } else {
+                visibleInfoCine();
+                textTitleCine.setText(titleCine);
+                for (Cinema f: cinemas) {
+                    if(f.getNombre().equals(titleCine)){
+                        provinciaCine.setText(f.getProvincia());
+                        localidadCine.setText(f.getLocalidad());
+                        direccionCine.setText(f.getAdreça());
+                        listObservableSesionsEnvio.clear();
+
+                        //atributos que envio a la nueva ventana (sesiones)
+                        tituloCine = f.getNombre();
+                        listaSesionesCines = sesions.stream().filter(sesion -> f.getIdCinema() == sesion.getIdCinema()).collect(Collectors.toList());
+                        listObservableSesionsEnvio.addAll(listaSesionesCines);
+
+                        listaSesionesCines.clear();
+                    }
                 }
             }
         }
     }
 
+    /**
+     * Page sesion.
+     * Hace la acción del botón "Ver Sesiones" del apartado Peliculas y Cines y abre la ventana con las sesiones de ese film o de ese cine
+     * @param event the event
+     * @throws IOException the io exception
+     */
     public void PageSesion(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
@@ -262,33 +410,30 @@ public class SampleController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Page films ciclo.
+     * Hace la acción del botón "Ver Peliculas" del apartado Ciclos y abre la ventana con los films de ese ciclo
+     * @param event the event
+     * @throws IOException the io exception
+     */
     public void PageFilmsCiclo(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader();
 
-        Parent root = loader.load(getClass().getResource("peliculas.fxml").openStream());
+        Parent root = loader.load(getClass().getResource("ciclos.fxml").openStream());
 
-        PeliculasController peliculasController = loader.getController();
-        peliculasController.recibeInfoSesiones(tituloCiclo, listObservableFilmsEnvio);
+        CiclosController ciclosController = loader.getController();
+        ciclosController.recibeInfoSesiones(tituloCiclo, listObservableFilmsEnvio);
 
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();
     }
 
-    public void makeDragable(){
-        tabPane.setOnMousePressed((event -> {
-            x=event.getSceneX();
-            y=event.getSceneY();
-        }));
 
-        tabPane.setOnMouseDragged((event -> {
-            Stage stage = (Stage) btnCerrar.getScene().getWindow();
-            stage.setX(event.getScreenX()-x);
-            stage.setY(event.getScreenY()-y);
-        }));
-    }
-
+    /**
+     * Muestra los datos del film seleccionado
+     */
     public void visibleInfoMovie(){
         textTitleFilm.setVisible(true);
         direcctorFilm.setVisible(true);
@@ -299,6 +444,9 @@ public class SampleController implements Initializable {
         sinopsiTitle.setVisible(true);
     }
 
+    /**
+     * Oculta los datos del film
+     */
     public void opaqueInfoMovie(){
         textTitleFilm.setVisible(false);
         direcctorFilm.setVisible(false);
@@ -309,6 +457,57 @@ public class SampleController implements Initializable {
         sinopsiTitle.setVisible(false);
     }
 
+    /**
+     * Muestra los datos del ciclo seleccionado
+     */
+    public void visibleInfoCicle(){
+        textTitleCiclo.setVisible(true);
+        infoCiclo.setVisible(true);
+        imageCiclo.setVisible(true);
+
+    }
+
+    /**
+     * Oculta los datos de los ciclos
+     */
+    public void opaqueInfoCicle(){
+        textTitleCiclo.setVisible(false);
+        infoCiclo.setVisible(false);
+        imageCiclo.setVisible(false);
+
+    }
+
+    /**
+     * Muestra los datos del cine seleccionado
+     */
+    public void visibleInfoCine(){
+        textTitleCine.setVisible(true);
+        provinciaTitle.setVisible(true);
+        provinciaCine.setVisible(true);
+        LocalidadTitle.setVisible(true);
+        localidadCine.setVisible(true);
+        direccionTitle.setVisible(true);
+        direccionCine.setVisible(true);
+    }
+
+    /**
+     * Oculta los datos de los cines
+     */
+    public void opaqueInfoCine(){
+        textTitleCine.setVisible(false);
+        provinciaTitle.setVisible(false);
+        provinciaCine.setVisible(false);
+        LocalidadTitle.setVisible(false);
+        localidadCine.setVisible(false);
+        direccionTitle.setVisible(false);
+        direccionCine.setVisible(false);
+    }
+
+    /**
+     * Buscador.
+     * Busca los films en el apartado "Peliculas"
+     * @param mouseEvent the mouse event
+     */
     public void buscador(MouseEvent mouseEvent) {
         listObservableFilms.clear();
         String titulo = textFieldPelicula.getText();
@@ -320,4 +519,22 @@ public class SampleController implements Initializable {
         listViewFilms.getItems().addAll(listObservableFilms);
 
     }
+
+    /**
+     * Buscador cines.
+     * Busca los cines en el apartado "Cines"
+     * @param mouseEvent the mouse event
+     */
+    public void buscadorCines(MouseEvent mouseEvent) {
+        listObservableCines.clear();
+        String titulo = textFieldCine.getText();
+
+        List<String> listaTitle = cinemas.stream().filter(cinema -> cinema.getNombre().toLowerCase().contains(titulo)).map(Cinema::getNombre).collect(Collectors.toList());
+
+        listObservableCines.addAll(listaTitle);
+        listViewCines.getItems().clear();
+        listViewCines.getItems().addAll(listObservableCines);
+
+    }
+
 }
